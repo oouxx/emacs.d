@@ -230,4 +230,14 @@ If no files marked, always operate on current line in dired-mode."
 ;; If you tramp is hanging, you can uncomment below line.
 ;; (setq tramp-ssh-controlmaster-options "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
 ;; }}
+
+(defun my-dired-highlight ()
+  "Highlight some lines in dired buffer."
+  (let* ((dirname (expand-file-name (if (consp dired-directory)
+                                        (car dired-directory)
+                                      dired-directory))))
+    (message "my-dired-highlight called dirname=%s" dirname)))
+
+(add-hook 'dired-after-readin-hook 'my-dired-highlight)
+
 (provide 'init-dired)
